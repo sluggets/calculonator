@@ -1,0 +1,20 @@
+$(document).ready(function() {
+  var canvas = document.getElementById("calc-head");
+  var ctx = canvas.getContext('2d');
+  ctx.lineJoin = 'round';
+  ctx.lineCap = 'round';
+  ctx.lineWidth = 10.0;
+  ctx.strokeStyle = '#000000';
+  ctx.moveTo(5, 100);
+  ctx.lineTo(100, 5);
+  ctx.lineTo(300, 5);
+  ctx.lineTo(695, 400);
+  ctx.stroke();
+  ctx.fillStyle = '#f5a819';
+  ctx.fill();
+  ctx.beginPath();
+  ctx.moveTo(25, 75);
+  ctx.lineTo(10, 10);
+  ctx.lineWidth = 5.0;
+  ctx.stroke();
+});
