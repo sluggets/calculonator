@@ -9,7 +9,29 @@ $(document).ready(function() {
   drawAntennas();
   drawAntennaTips();
   
+  looks = true;;
+  func_array = [lookUp, lookLeft, lookRight, lookDown];
+
+  delayedGlances();
+
+  
 });
+
+function stopGlances()
+{
+  clearInterval(intervalID);
+}
+
+function delayedGlances()
+{
+  intervalID = setInterval(glances, 8000);
+}
+
+function glances()
+{
+  ran_num = getRandomIntInclusive(0, 3);
+  func_array[ran_num]();
+}
 
 function drawHeadCap()
 {
@@ -67,4 +89,49 @@ function drawAntennaTips()
   ctx.lineWidth = 3.0;
   ctx.strokeStyle = "black";
   ctx.stroke();
+}
+
+function getRandomIntInclusive(min, max) 
+{
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function lookUp()
+{
+
+  // continually move pupils
+  // top value not exceed 35 or -12 OR 19 or 3 in side
+  // left value not exceed -12 or 35 OR 19 or 3 in top/bottom
+  $(".pupil").animate({"top": "-=22px"}, 900);  
+  $(".pupil").animate({"left": "-=7px"}, 900);  
+  $(".pupil").animate({"left": "+=16px"}, 900);  
+  $(".pupil").animate({"left": "-=9px"}, 900);  
+  $(".pupil").animate({"top": "+=22px"}, 900);  
+}
+
+function lookLeft()
+{
+  $(".pupil").animate({"left": "-=12"}, 900);
+  $(".pupil").animate({"top": "-=7"}, 200);
+  $(".pupil").animate({"top": "+=22"}, 900);
+  $(".pupil").animate({"top": "-=15"}, 300);
+  $(".pupil").animate({"left": "+=12"}, 900);
+}
+
+function lookRight()
+{
+  $(".pupil").animate({"left": "+=12"}, 900);
+  $(".pupil").animate({"top": "-=7"}, 300);
+  $(".pupil").animate({"top": "+=22"}, 900);
+  $(".pupil").animate({"top": "-=15"}, 400);
+  $(".pupil").animate({"left": "-=12"}, 900);
+}
+
+function lookDown()
+{
+  $(".pupil").animate({"top": "+=22px"}, 900);  
+  $(".pupil").animate({"left": "-=7px"}, 400);  
+  $(".pupil").animate({"left": "+=16px"}, 900);  
+  $(".pupil").animate({"left": "-=9px"}, 300);  
+  $(".pupil").animate({"top": "-=22px"}, 900);  
 }
