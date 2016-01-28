@@ -13,6 +13,10 @@ $(document).ready(function() {
   drawAntennas();
   drawAntennaTips();
   
+
+  // draw mouth of teeth
+  drawTeeth();
+
   looks = true;;
   // array of eye animations
   func_array = [lookUp, lookLeft, lookRight, lookDown];
@@ -37,6 +41,28 @@ function glances()
 {
   ran_num = getRandomIntInclusive(0, 3);
   func_array[ran_num]();
+}
+
+function drawTeeth()
+{
+  cvs = document.getElementById("teeth");
+  ctxTeeth = cvs.getContext('2d');
+  ctxTeeth.lineJoin = 'round';
+  ctxTeeth.lineCap = 'round';
+  ctxTeeth.lineWidth = 5.0;
+  ctxTeeth.strokeStyle = '#000';  
+  ctxTeeth.moveTo(25, 3);
+  ctxTeeth.lineTo(25, 288);
+  ctxTeeth.moveTo(97.5, 292);
+  ctxTeeth.lineTo(97.5, 0)
+  ctxTeeth.moveTo(170, 0);
+  ctxTeeth.lineTo(170, 292);
+  ctxTeeth.moveTo(242.5, 292);
+  ctxTeeth.lineTo(242.5, 0);
+  ctxTeeth.moveTo(315, 0);
+  ctxTeeth.lineTo(315, 288);
+  ctxTeeth.stroke();
+
 }
 
 function drawHeadCap()
