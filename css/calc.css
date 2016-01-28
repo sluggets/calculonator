@@ -14,7 +14,7 @@
 #calc-perim
 {
   width: 400px;
-  height: 500px;
+  height: 550px;
   background-color: #f5a819;
   margin: auto;
   border-style: none solid solid solid;
@@ -38,6 +38,7 @@
   height: 80px;
   border-radius: 50%;
   background-color: #a8f682;
+  box-shadow: inset 3px 3px 10px 1px grey;
 }
 
 #left-eye
@@ -63,4 +64,17 @@
   position: relative;
   left: 10px;
   top: 10px;
+  box-shadow: 2px 2px 2px grey;
+}
+
+#mouth
+{
+  background-color: #a8f682;
+  width: 350px;
+  height: 300px;
+  margin: auto;
+  border-style: solid;
+  border-width: 5px;
+  margin-top: 50px;
+  border-radius: 50px;
 }

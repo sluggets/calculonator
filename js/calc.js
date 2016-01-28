@@ -1,17 +1,23 @@
 $(document).ready(function() {
+
+  // setup canvas and line styles
   canvas = document.getElementById("calc-head");
   ctx = canvas.getContext('2d');
   ctx.lineJoin = 'round';
   ctx.lineCap = 'round';
   ctx.lineWidth = 10.0;
   ctx.strokeStyle = '#000000';
+  
+  // draw parts of Calculon's head that css doesn't handle
   drawHeadCap();
   drawAntennas();
   drawAntennaTips();
   
   looks = true;;
+  // array of eye animations
   func_array = [lookUp, lookLeft, lookRight, lookDown];
 
+  // uses setInterval to run continous eye movement
   delayedGlances();
 
   
@@ -96,12 +102,11 @@ function getRandomIntInclusive(min, max)
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
+// for directional animations:
+// top value not exceed 35 or -12 OR 19 or 3 in side
+// left value not exceed -12 or 35 OR 19 or 3 in top/bottom
 function lookUp()
 {
-
-  // continually move pupils
-  // top value not exceed 35 or -12 OR 19 or 3 in side
-  // left value not exceed -12 or 35 OR 19 or 3 in top/bottom
   $(".pupil").animate({"top": "-=22px"}, 900);  
   $(".pupil").animate({"left": "-=7px"}, 900);  
   $(".pupil").animate({"left": "+=16px"}, 900);  
