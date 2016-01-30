@@ -24,6 +24,16 @@ $(document).ready(function() {
   // uses setInterval to run continous eye movement
   delayedGlances();
 
+  globVal = 0;
+  /*$("button").click(function() {
+    var ind = $("#eye-slot").css("background-color");
+    console.log(ind);
+    if (ind == "rgb(0, 0, 0)")
+    {
+      deleteEyes();       
+    }
+  });*/
+
   
 });
 
@@ -165,4 +175,73 @@ function lookDown()
   $(".pupil").animate({"left": "+=16px"}, 900);  
   $(".pupil").animate({"left": "-=9px"}, 300);  
   $(".pupil").animate({"top": "-=22px"}, 900);  
+}
+
+
+function restoreEyes()
+{
+  $("#eye-slot").empty();
+  leftEye = document.createElement("div");
+  rightEye = document.createElement("div"); 
+  pupil = document.createElement("div");
+
+  leftEye.setAttribute("id", "left-eye");
+  leftEye.setAttribute("class", "eyes");
+
+  rightEye.setAttribute("id", "right-eye");
+  rightEye.setAttribute("class", "eyes");
+
+  pupil.setAttribute("class", "pupil");
+
+
+  $("#eye-slot").append(leftEye);
+  $("#eye-slot").append(rightEye);
+  
+  $(".eyes").append(pupil);
+  $("#eye-slot").css({"background-color": "#000", "box-shadow": "none", "border-style": "none"});
+  var ind = document.getElementById("eye-slot");
+  ind.setAttribute("mode", "eyes");
+}
+
+function deleteEyes()
+{
+  $("#eye-slot").empty();
+  $("#eye-slot").css({"background-color": "#a8f682", "box-shadow": "inset 3px 3px 10px 1px grey", "border-style": "solid", "border-width": "5px"});
+  /*dataView = document.createElement("div");
+  dataView.setAttribute("id", "data-view");
+  $("#eye-slot").append(dataView);*/
+  numField = document.createElement("div");
+  numField.setAttribute("id", "num-field");
+  $("#eye-slot").append(numField);
+  readout = document.createElement("p");
+  readout.setAttribute("id", "readout");
+  $("#num-field").append(readout);
+  var ind = document.getElementById("eye-slot");
+  ind.setAttribute("mode", "readout");
+}
+// maybe make this display and tabulate globVal?
+function displayValue(val)
+{
+  //var ind = $("#eye-slot").css("background-color");
+  var ind = document.getElementById("eye-slot");
+  var att = ind.getAttribute("mode"); 
+  console.log(att);
+  if (att  == "eyes")
+  {
+    deleteEyes();       
+  }
+  $("#readout").append(val);
+}
+
+function clearValue()
+{
+  if (globVal !== 0)
+  {
+    globVal = 0;
+    deleteEyes();
+  }
+  else
+  {
+    deleteEyes();
+  }
 }

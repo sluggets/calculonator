@@ -32,6 +32,28 @@
   margin: auto;
 }
 
+/*#data-view
+{
+  width: 310px;
+  height: 80px; 
+  background-color: #a8f682;
+  border-radius: 50%;
+  box-shadow: inset 3px 3px 10px 1px grey;
+}*/
+#num-field
+{
+  margin-right: 15px;
+  margin-top: 7px;
+}
+
+#num-field > p
+{
+  font-size: 50px; 
+  float: right;
+  font-family: 'Candal', sans-serif;
+  text-shadow: 1px 1px 3px grey;
+}
+
 .eyes
 {
   width: 80px;
@@ -76,9 +98,9 @@
   border-style: solid;
   border-width: 5px;
   margin-top: 50px;
-  /*margin-bottom: 20px;*/
   border-radius: 50px;
   position: relative;
+  box-shadow: inset 3px 3px 10px 1px grey;
 }
 
 #mouth canvas
@@ -93,7 +115,7 @@
 {
   position: relative;
   margin: auto;
-  margin-top: 25px;
+  margin-top: 16px;
   margin-left: 20px;
 }
 
@@ -103,25 +125,44 @@ button
   border-width: 5px;
   border-color: #000;*/
   display: block;
-  height: 30px;
-  width: 30px;
-  background-color: #a8f682;
+  height: 40px;
+  width: 40px;
+  /*background-color: #a8f682;*/
+  background-color: #bdf8a0;
   border-style: none;
   font-family: 'Candal', sans-serif;
   font-size: 20px;
+  box-shadow: 2px 2px 2px grey;
 }
 
 button:hover
 {
   background-color: #bdf8a0; 
+  box-shadow: 4px 4px 4px grey;
 }
 
 .left-margin
 {
-  margin-left: 10px;
+  margin-left: 5px;
+}
+
+.mid-left-margin
+{
+  margin-left: -2.5px;
+}
+
+.mid-right-margin
+{
+  margin-left: -9px;
 }
 
 .right-margin
 {
-  margin-left: -10px;
+  margin-left: -17px;
 }
+
+#mod
+{
+  font-size: 14px;
+}
+
