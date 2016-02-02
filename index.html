@@ -42,66 +42,66 @@
             <button id="eye" class="left-margin" onclick="restoreEyes();"><i class="fa fa-eye"></i></button>
           </div>
           <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button onclick="clearValue();" id="clear" class="mid-left-margin">C</button>
+            <button onclick="clearComplete();" id="clear" class="mid-left-margin">C</button>
           </div>
           <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="mod" class="mid-right-margin">%</button>
+            <button id="mod" class="mid-right-margin" onclick="getResult('mod');">%</button>
           </div>
           <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="divide" class="right-margin">&divide</button>
-          </div>
-        </div>
-        <div class="row custom-align">
-          <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="7" class="left-margin" onclick="displayValue(7);">7</button>
-          </div>
-          <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="8" class="mid-left-margin">8</button>
-          </div>
-          <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="9" class="mid-right-margin">9</button>
-          </div>
-          <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="multiply" class="right-margin">X</button>
+            <button id="divide" class="right-margin" onclick="getResult('divide');">&divide</button>
           </div>
         </div>
         <div class="row custom-align">
           <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="4" class="left-margin">4</button>
+            <button id="7" class="left-margin" onclick="displayAndComputeValue(7);">7</button>
           </div>
           <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="5" class="mid-left-margin">5</button>
+            <button id="8" class="mid-left-margin" onclick="displayAndComputeValue(8);">8</button>
           </div>
           <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="6" class="mid-right-margin">6</button>
+            <button id="9" class="mid-right-margin" onclick="displayAndComputeValue(9);">9</button>
           </div>
           <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="subtract" class="right-margin">-</button>
-          </div>
-        </div>
-        <div class="row custom-align">
-          <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="1" class="left-margin">1</button>
-          </div>
-          <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="2" class="mid-left-margin">2</button>
-          </div>
-          <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="3" class="mid-right-margin">3</button>
-          </div>
-          <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="add" class="right-margin">+</button>
+            <button id="multiply" class="right-margin" onclick="getResult('multiply');">X</button>
           </div>
         </div>
         <div class="row custom-align">
           <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="0" class="left-margin">0</button>
+            <button id="4" class="left-margin" onclick="displayAndComputeValue(4);">4</button>
           </div>
           <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="float" class="mid-left-margin">.</button>
+            <button id="5" class="mid-left-margin" onclick="displayAndComputeValue(5);">5</button>
           </div>
           <div class="col-xs-3 col-md-3 col-lg-3 ">
-            <button id="equals" class="mid-right-margin">=</button>
+            <button id="6" class="mid-right-margin" onclick="displayAndComputeValue(6);">6</button>
+          </div>
+          <div class="col-xs-3 col-md-3 col-lg-3 ">
+            <button id="subtract" class="right-margin" onclick="handleNegative();">-</button>
+          </div>
+        </div>
+        <div class="row custom-align">
+          <div class="col-xs-3 col-md-3 col-lg-3 ">
+            <button id="1" class="left-margin" onclick="displayAndComputeValue(1);">1</button>
+          </div>
+          <div class="col-xs-3 col-md-3 col-lg-3 ">
+            <button id="2" class="mid-left-margin" onclick="displayAndComputeValue(2);">2</button>
+          </div>
+          <div class="col-xs-3 col-md-3 col-lg-3 ">
+            <button id="3" class="mid-right-margin" onclick="displayAndComputeValue(3);">3</button>
+          </div>
+          <div class="col-xs-3 col-md-3 col-lg-3 ">
+            <button id="add" class="right-margin" onclick="getResult('add');">+</button>
+          </div>
+        </div>
+        <div class="row custom-align">
+          <div class="col-xs-3 col-md-3 col-lg-3 ">
+            <button id="0" class="left-margin" onclick="displayAndComputeValue(0);">0</button>
+          </div>
+          <div class="col-xs-3 col-md-3 col-lg-3 ">
+            <button id="float" class="mid-left-margin" onclick="displayAndComputeValue('.');">.</button>
+          </div>
+          <div class="col-xs-3 col-md-3 col-lg-3 ">
+            <button id="equals" class="mid-right-margin" onclick="equalTally();">=</button>
           </div>
           <div class="col-xs-3 col-md-3 col-lg-3">
             <button class="right-margin">A</button>

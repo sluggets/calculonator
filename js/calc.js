@@ -24,7 +24,10 @@ $(document).ready(function() {
   // uses setInterval to run continous eye movement
   delayedGlances();
 
-  globVal = 0;
+  strVal = "";
+  globVal = null;
+  totalVal = null;
+  globOp = "";
   /*$("button").click(function() {
     var ind = $("#eye-slot").css("background-color");
     console.log(ind);
@@ -44,7 +47,7 @@ function stopGlances()
 
 function delayedGlances()
 {
-  intervalID = setInterval(glances, 8000);
+  intervalID = setInterval(glances, 2000);
 }
 
 function glances()
@@ -220,28 +223,267 @@ function deleteEyes()
   ind.setAttribute("mode", "readout");
 }
 // maybe make this display and tabulate globVal?
-function displayValue(val)
+function displayAndComputeValue(val)
 {
-  //var ind = $("#eye-slot").css("background-color");
   var ind = document.getElementById("eye-slot");
   var att = ind.getAttribute("mode"); 
-  console.log(att);
   if (att  == "eyes")
   {
     deleteEyes();       
   }
+
+  if (totalVal)
+  {
+    clearValue();
+    totalVal = null;
+  }
+
   $("#readout").append(val);
+  strVal += val;
 }
 
 function clearValue()
 {
-  if (globVal !== 0)
+  /*console.log("globVal: " + globVal, "globOp: " + globOp, "strVal: " + strVal, "totalVal: " + totalVal);*/
+  if (globVal !== null)
   {
-    globVal = 0;
+    globVal = null;
+    strVal = "";
+    globOp = "";
     deleteEyes();
   }
   else
   {
     deleteEyes();
   }
+}
+
+function clearComplete()
+{
+    totalVal = null;
+    globVal = null;
+    strVal = "";
+    globOp = "";
+    deleteEyes();
+}
+
+function getResult(computeType)
+{
+  console.log('inside getResult');
+  if ((globOp) && globOp !== computeType)
+  {
+    if (strVal.indexOf('.') < 0)
+    {
+      var tempVal;
+      if (checkZeroValue(strVal))
+      {
+        tempVal = '0'; 
+      }
+      else
+      {
+        tempVal = parseInt(strVal);
+      }
+      computeVal(globOp, tempVal);
+      strVal = "";
+    }
+    else
+    {
+      var tempVal;
+      if (checkZeroValue(strVal))
+      {
+        tempVal = '0'; 
+      }
+      else
+      {
+        tempVal = parseFloat(strVal);
+      }
+      computeVal(globOp, tempVal);
+      strVal = "";
+    }
+  }
+  globOp = computeType;
+  if (globVal == null)
+  {
+    if(totalVal || totalVal == 0)
+    {
+      globVal = totalVal;
+      computeVal(computeType, null); 
+      strVal = "";
+      totalVal = null;
+    }
+    else if (strVal.indexOf('.') < 0)
+    {
+      globVal = parseInt(strVal);
+      computeVal(computeType, null); 
+      strVal = "";
+    }
+    else
+    {
+      globVal = parseFloat(strVal); 
+      computeVal(computeType, null); 
+      strVal = "";
+    }
+  }
+  else
+  {
+    if (strVal.indexOf('.') < 0)
+    {
+      var tempVal;
+      if (checkZeroValue(strVal))
+      {
+        tempVal = '0'; 
+      }
+      else
+      {
+        tempVal = parseInt(strVal);
+      }
+      computeVal(computeType, tempVal);
+      strVal = "";
+    }
+    else
+    {
+      var tempVal;
+      if (checkZeroValue(strVal))
+      {
+        tempVal = '0'; 
+      }
+      else
+      {
+        tempVal = parseFloat(strVal);
+      }
+      computeVal(computeType, tempVal);
+      strVal = "";
+    }
+  }
+}
+
+function computeVal(computeType, tempVal)
+{
+  switch (computeType)
+  {
+    case "divide":
+      if (tempVal)
+      {
+        if (tempVal == '0')
+        {
+          tempVal = 0;
+        }
+        globVal /= tempVal;
+      }
+      else
+      {
+        $("#readout").append('/');
+      }
+      break;
+    case "multiply":
+      if (tempVal)
+      {
+        if (tempVal == '0')
+        {
+          tempVal = 0;
+        }
+        console.log("inside multiply");
+        console.log("globVal: " + globVal);
+        console.log("tempVal: " + tempVal);
+        globVal *= tempVal;
+      }
+      else
+      {
+        $("#readout").append('X');
+      }
+      break;
+    case "mod":
+      if (tempVal)
+      {
+        if (tempVal == '0')
+        {
+          tempVal = 0;
+        }
+        globVal %= tempVal;
+      }
+      else
+      {
+        $("#readout").append('%');
+      }
+      break;
+    case "subtract":
+      console.log("tempVal: " + tempVal);
+      console.log("globVal: " + globVal);
+      console.log("inside subtract");
+      if (tempVal)
+      {
+        if (tempVal == '0')
+        {
+          tempVal = 0;
+        }
+        console.log("peforming subtraction");
+        globVal -= tempVal;
+      }
+      else
+      {
+        console.log("appending minus sign");
+        $("#readout").append('-');
+      }
+      break;
+    case "add":
+      if (tempVal)
+      {
+        if (tempVal == '0')
+        {
+          tempVal = 0;
+        }
+        globVal += tempVal;
+      }
+      else
+      {
+        $("#readout").append('+');
+      }
+      break;
+  }
+
+}
+
+function handleNegative()
+{
+  console.log('in handleNegative: ' + strVal);
+  if (strVal.length == 0 && (!totalVal))
+  {
+    displayAndComputeValue('-');
+    //$("#readout").append('-');
+  }
+  else
+  {
+    getResult("subtract");
+  }
+}
+
+function equalTally()
+{
+  getResult(globOp);
+  totalVal = globVal;
+  clearValue();
+  if (totalVal % 1 !== 0)
+  {
+    var printVal = totalVal.toFixed(2);
+  }
+  else
+  {
+    var printVal = totalVal;
+  }
+  $("#readout").append(printVal);
+}
+
+// I find myself checking for null, and the number 0 while
+// necessary for calculations, returns null/false/whatever!
+// so this substitutes with the string of zero so checks for zero
+// don't show null. Also handles negative zero entries
+// and zero floats
+function checkZeroValue(val)
+{
+  if (val == '0' || val == '0.0' || val == '-0' || val == '-0.0')
+  {
+    return true;
+  }
+
+  return false;
 }
