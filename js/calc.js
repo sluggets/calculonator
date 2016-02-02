@@ -487,3 +487,17 @@ function checkZeroValue(val)
 
   return false;
 }
+
+function playRandom()
+{
+  var clips = ["js/eating-donkeys.mp3", "js/no-scream.mp3", "js/print-it.mp3", "js/remote-control.mp3", "js/self-explanatory.mp3", "js/sway-emotions.mp3", "js/two-takes.mp3", "js/unholy-acting.mp3"];
+  var ran_num = getRandomIntInclusive(0, clips.length - 1);
+  var current_clip = clips[ran_num];
+  var audio = new Audio(current_clip);
+  audio.play();
+}
+
+function getRandomIntInclusive(min, max) 
+{
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
