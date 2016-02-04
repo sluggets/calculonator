@@ -28,6 +28,7 @@ $(document).ready(function() {
   globVal = null;
   totalVal = null;
   globOp = "";
+  opFlag = true;
   /*$("button").click(function() {
     var ind = $("#eye-slot").css("background-color");
     console.log(ind);
@@ -269,9 +270,14 @@ function clearComplete()
 
 function getResult(computeType)
 {
+  opFlag = true;
   console.log('inside getResult');
+  console.log('computeType: ' + computeType);
+  console.log('globOp: ' + globOp);
+  
   if ((globOp) && globOp !== computeType)
   {
+    opFlag = false;
     if (strVal.indexOf('.') < 0)
     {
       var tempVal;
@@ -362,7 +368,16 @@ function computeVal(computeType, tempVal)
   switch (computeType)
   {
     case "divide":
-      if (tempVal)
+      if (opFlag && tempVal)
+      {
+        if (tempVal == '0')
+        {
+          tempVal = 0;
+        }
+        globVal /= tempVal;
+        $("#readout").append('/');
+      }
+      else if (tempVal)
       {
         if (tempVal == '0')
         {
@@ -376,15 +391,21 @@ function computeVal(computeType, tempVal)
       }
       break;
     case "multiply":
-      if (tempVal)
+      if (opFlag && tempVal)
       {
         if (tempVal == '0')
         {
           tempVal = 0;
         }
-        console.log("inside multiply");
-        console.log("globVal: " + globVal);
-        console.log("tempVal: " + tempVal);
+        globVal *= tempVal;
+        $("#readout").append('X');
+      }
+      else if (tempVal)
+      {
+        if (tempVal == '0')
+        {
+          tempVal = 0;
+        }
         globVal *= tempVal;
       }
       else
@@ -393,7 +414,16 @@ function computeVal(computeType, tempVal)
       }
       break;
     case "mod":
-      if (tempVal)
+      if (opFlag && tempVal)
+      {
+        if (tempVal == '0')
+        {
+          tempVal = 0;
+        }
+        globVal %= tempVal;
+        $("#readout").append('%');
+      }
+      else if (tempVal)
       {
         if (tempVal == '0')
         {
@@ -407,37 +437,77 @@ function computeVal(computeType, tempVal)
       }
       break;
     case "subtract":
+      var readout = document.getElementById("readout");
+      var negTest = readout.innerHTML;
+      console.log("#readout: " + negTest);
       console.log("tempVal: " + tempVal);
-      console.log("globVal: " + globVal);
-      console.log("inside subtract");
-      if (tempVal)
+      var result = negTest.match(new RegExp("-", "g")); 
+      if (result)
+      {
+        len = result.length; 
+      }
+      else
+      {
+        len = 600;
+      }
+      //console.log(negTest);
+      //if (tempVal && len < 2 && negTest[0] == "-")
+      if (opFlag && tempVal)
       {
         if (tempVal == '0')
         {
           tempVal = 0;
         }
-        console.log("peforming subtraction");
+        console.log("inside first if");
+        //console.log("peforming subtraction");
+        globVal -= tempVal;
+        $("#readout").append('-');
+      }
+      else if (tempVal)
+      {
+        if (tempVal == '0')
+        {
+          tempVal = 0;
+        }
+        //console.log("peforming subtraction");
+        console.log("inside second if");
         globVal -= tempVal;
       }
       else
       {
-        console.log("appending minus sign");
+        console.log("inside third if");
+        //globVal -= tempVal;
         $("#readout").append('-');
       }
       break;
     case "add":
-      if (tempVal)
+    console.log("globVal: " + globVal);
+    console.log("tempVal: " + tempVal);
+      if (opFlag && tempVal)
       {
+        console.log("inside first if");
         if (tempVal == '0')
         {
           tempVal = 0;
         }
         globVal += tempVal;
+        $("#readout").append('+');
+      }
+      else if (tempVal)
+      {
+        console.log("inside second if");
+        if (tempVal == '0')
+        {
+          tempVal = 0;
+        }
+        globVal += tempVal;
+        $("#readout").append('+');
       }
       else
       {
         $("#readout").append('+');
       }
+      opFlag = "add"
       break;
   }
 
