@@ -17,40 +17,46 @@ $(document).ready(function() {
   // draw mouth of teeth
   drawTeeth();
 
-  looks = true;;
   // array of eye animations
   func_array = [lookUp, lookLeft, lookRight, lookDown];
 
   // uses setInterval to run continous eye movement
   delayedGlances();
 
-  strVal = "";
-  globVal = null;
-  totalVal = null;
-  globOp = "";
-  opFlag = true;
-  /*$("button").click(function() {
-    var ind = $("#eye-slot").css("background-color");
-    console.log(ind);
-    if (ind == "rgb(0, 0, 0)")
-    {
-      deleteEyes();       
-    }
-  });*/
+  // set up some global vars to save/reset state
 
+  // collects button presses
+  strVal = "";
+
+  // holds result of single calculation 
+  globVal = null;
+
+  // tracks running total while calculations continue
+  totalVal = null;
+
+  // stores operator type in case of operator changes during 
+  // chaining calculations
+  globOp = "";
+
+  // toggle flag used to control when to print the operator
+  // to screen and when not to when chaining calculations
+  opFlag = true;
   
 });
 
+// stops delayed glances eye animation
 function stopGlances()
 {
   clearInterval(intervalID);
 }
 
+// sets up delay between calls of glances function
 function delayedGlances()
 {
   intervalID = setInterval(glances, 2000);
 }
 
+// randomly selects an eye animation an calls it
 function glances()
 {
   ran_num = getRandomIntInclusive(0, 3);
@@ -137,14 +143,15 @@ function drawAntennaTips()
   ctx.stroke();
 }
 
+// provides randomness to eye animation and sound clips
 function getRandomIntInclusive(min, max) 
 {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
 // for directional animations:
-// top value not exceed 35 or -12 OR 19 or 3 in side
-// left value not exceed -12 or 35 OR 19 or 3 in top/bottom
+// css: top value not exceed 35 or -12 OR 19 or 3 in side
+// css: left value not exceed -12 or 35 OR 19 or 3 in top/bottom
 function lookUp()
 {
   $(".pupil").animate({"top": "-=22px"}, 900);  
@@ -182,6 +189,7 @@ function lookDown()
 }
 
 
+// restores animated eyes to calculation field
 function restoreEyes()
 {
   $("#eye-slot").empty();
@@ -207,13 +215,11 @@ function restoreEyes()
   ind.setAttribute("mode", "eyes");
 }
 
+// deletes eyes to display calculation field
 function deleteEyes()
 {
   $("#eye-slot").empty();
   $("#eye-slot").css({"background-color": "#a8f682", "box-shadow": "inset 3px 3px 10px 1px grey", "border-style": "solid", "border-width": "5px"});
-  /*dataView = document.createElement("div");
-  dataView.setAttribute("id", "data-view");
-  $("#eye-slot").append(dataView);*/
   numField = document.createElement("div");
   numField.setAttribute("id", "num-field");
   $("#eye-slot").append(numField);
@@ -223,29 +229,37 @@ function deleteEyes()
   var ind = document.getElementById("eye-slot");
   ind.setAttribute("mode", "readout");
 }
-// maybe make this display and tabulate globVal?
+
+// prints presses to screen and creates operands
 function displayAndComputeValue(val)
 {
   var ind = document.getElementById("eye-slot");
   var att = ind.getAttribute("mode"); 
+
+  // if eyes are present when calculation starts
+  // get rid of them
   if (att  == "eyes")
   {
     deleteEyes();       
   }
 
+  // if a non-operator number button is pressed
+  // clears globals to quit chaining, start new calculations
   if (totalVal)
   {
     clearValue();
     totalVal = null;
   }
 
+  // prints button presses to screen
+  // and adds them to ongoing strVal, creates operand
   $("#readout").append(val);
   strVal += val;
 }
 
+// clears globals, deletes eyes, except totalVal
 function clearValue()
 {
-  /*console.log("globVal: " + globVal, "globOp: " + globOp, "strVal: " + strVal, "totalVal: " + totalVal);*/
   if (globVal !== null)
   {
     globVal = null;
@@ -259,6 +273,7 @@ function clearValue()
   }
 }
 
+// clears globals, AND totalVal
 function clearComplete()
 {
     totalVal = null;
@@ -268,13 +283,12 @@ function clearComplete()
     deleteEyes();
 }
 
+// decides which operator to use
+// and which values to pass for computation
+// turns appropriate strings into floats
 function getResult(computeType)
 {
   opFlag = true;
-  console.log('inside getResult');
-  console.log('computeType: ' + computeType);
-  console.log('globOp: ' + globOp);
-  
   if ((globOp) && globOp !== computeType)
   {
     opFlag = false;
@@ -363,6 +377,8 @@ function getResult(computeType)
   }
 }
 
+// performs actual calculations
+// and prints appropriate operators to screen
 function computeVal(computeType, tempVal)
 {
   switch (computeType)
@@ -437,7 +453,8 @@ function computeVal(computeType, tempVal)
       }
       break;
     case "subtract":
-      var readout = document.getElementById("readout");
+      // below commented code was a bad red herring!
+      /*var readout = document.getElementById("readout");
       var negTest = readout.innerHTML;
       console.log("#readout: " + negTest);
       console.log("tempVal: " + tempVal);
@@ -449,7 +466,7 @@ function computeVal(computeType, tempVal)
       else
       {
         len = 600;
-      }
+      }*/
       //console.log(negTest);
       //if (tempVal && len < 2 && negTest[0] == "-")
       if (opFlag && tempVal)
@@ -458,8 +475,6 @@ function computeVal(computeType, tempVal)
         {
           tempVal = 0;
         }
-        console.log("inside first if");
-        //console.log("peforming subtraction");
         globVal -= tempVal;
         $("#readout").append('-');
       }
@@ -469,23 +484,16 @@ function computeVal(computeType, tempVal)
         {
           tempVal = 0;
         }
-        //console.log("peforming subtraction");
-        console.log("inside second if");
         globVal -= tempVal;
       }
       else
       {
-        console.log("inside third if");
-        //globVal -= tempVal;
         $("#readout").append('-');
       }
       break;
     case "add":
-    console.log("globVal: " + globVal);
-    console.log("tempVal: " + tempVal);
       if (opFlag && tempVal)
       {
-        console.log("inside first if");
         if (tempVal == '0')
         {
           tempVal = 0;
@@ -495,7 +503,6 @@ function computeVal(computeType, tempVal)
       }
       else if (tempVal)
       {
-        console.log("inside second if");
         if (tempVal == '0')
         {
           tempVal = 0;
@@ -507,19 +514,19 @@ function computeVal(computeType, tempVal)
       {
         $("#readout").append('+');
       }
-      opFlag = "add"
+      //opFlag = "add"
       break;
   }
 
 }
 
+// handles whether minus button is subtraction 
+// operator or a prefix indicating a negative value
 function handleNegative()
 {
-  console.log('in handleNegative: ' + strVal);
   if (strVal.length == 0 && (!totalVal))
   {
     displayAndComputeValue('-');
-    //$("#readout").append('-');
   }
   else
   {
@@ -527,11 +534,16 @@ function handleNegative()
   }
 }
 
+// tallies up current value of calculations
+// to print to the screen, chaining is still
+// possible after the equal button is hit
 function equalTally()
 {
   getResult(globOp);
   totalVal = globVal;
   clearValue();
+  
+  // fixes floats to 2 decimal points
   if (totalVal % 1 !== 0)
   {
     var printVal = totalVal.toFixed(2);
@@ -558,6 +570,7 @@ function checkZeroValue(val)
   return false;
 }
 
+// plays random calculon clip
 function playRandom()
 {
   var clips = ["js/eating-donkeys.mp3", "js/no-scream.mp3", "js/print-it.mp3", "js/remote-control.mp3", "js/self-explanatory.mp3", "js/sway-emotions.mp3", "js/two-takes.mp3", "js/unholy-acting.mp3"];
