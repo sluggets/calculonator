@@ -53,7 +53,7 @@ function stopGlances()
 // sets up delay between calls of glances function
 function delayedGlances()
 {
-  intervalID = setInterval(glances, 6000);
+  intervalID = setInterval(glances, 2000);
 }
 
 // randomly selects an eye animation an calls it
@@ -71,16 +71,16 @@ function drawTeeth()
   ctxTeeth.lineCap = 'round';
   ctxTeeth.lineWidth = 5.0;
   ctxTeeth.strokeStyle = '#000';  
-  ctxTeeth.moveTo(25, 3);
-  ctxTeeth.lineTo(25, 288);
-  ctxTeeth.moveTo(97.5, 292);
-  ctxTeeth.lineTo(97.5, 0)
-  ctxTeeth.moveTo(170, 0);
-  ctxTeeth.lineTo(170, 292);
-  ctxTeeth.moveTo(242.5, 292);
-  ctxTeeth.lineTo(242.5, 0);
-  ctxTeeth.moveTo(315, 0);
-  ctxTeeth.lineTo(315, 288);
+  ctxTeeth.moveTo(38, 3);
+  ctxTeeth.lineTo(38, 288);
+  ctxTeeth.moveTo(90.5, 292);
+  ctxTeeth.lineTo(90.5, 0)
+  ctxTeeth.moveTo(143, 0);
+  ctxTeeth.lineTo(143, 292);
+  ctxTeeth.moveTo(195.5, 292);
+  ctxTeeth.lineTo(195.5, 0);
+  ctxTeeth.moveTo(250, 0);
+  ctxTeeth.lineTo(250, 288);
   ctxTeeth.stroke();
 
 }
@@ -154,38 +154,38 @@ function getRandomIntInclusive(min, max)
 // css: left value not exceed -12 or 35 OR 19 or 3 in top/bottom
 function lookUp()
 {
-  $(".pupil").animate({"top": "-=22px"}, 1500);  
-  $(".pupil").animate({"left": "-=7px"}, 1500);  
+  $(".pupil").animate({"top": "-=22px"}, 900);  
+  $(".pupil").animate({"left": "-=7px"}, 900);  
   $(".pupil").animate({"left": "+=16px"}, 900);  
   $(".pupil").animate({"left": "-=9px"}, 900);  
-  $(".pupil").animate({"top": "+=22px"}, 1500);  
+  $(".pupil").animate({"top": "+=22px"}, 900);  
 }
 
 function lookLeft()
 {
   $(".pupil").animate({"left": "-=12"}, 900);
-  $(".pupil").animate({"top": "-=7"}, 600);
-  $(".pupil").animate({"top": "+=22"}, 1500);
-  $(".pupil").animate({"top": "-=15"}, 600);
-  $(".pupil").animate({"left": "+=12"}, 1500);
+  $(".pupil").animate({"top": "-=7"}, 200);
+  $(".pupil").animate({"top": "+=22"}, 900);
+  $(".pupil").animate({"top": "-=15"}, 300);
+  $(".pupil").animate({"left": "+=12"}, 900);
 }
 
 function lookRight()
 {
-  $(".pupil").animate({"left": "+=12"}, 1500);
-  $(".pupil").animate({"top": "-=7"}, 600);
+  $(".pupil").animate({"left": "+=12"}, 900);
+  $(".pupil").animate({"top": "-=7"}, 300);
   $(".pupil").animate({"top": "+=22"}, 900);
   $(".pupil").animate({"top": "-=15"}, 400);
-  $(".pupil").animate({"left": "-=12"}, 1500);
+  $(".pupil").animate({"left": "-=12"}, 900);
 }
 
 function lookDown()
 {
-  $(".pupil").animate({"top": "+=22px"}, 1500);  
+  $(".pupil").animate({"top": "+=22px"}, 900);  
   $(".pupil").animate({"left": "-=7px"}, 400);  
-  $(".pupil").animate({"left": "+=16px"}, 1500);  
+  $(".pupil").animate({"left": "+=16px"}, 900);  
   $(".pupil").animate({"left": "-=9px"}, 300);  
-  $(".pupil").animate({"top": "-=22px"}, 1500);  
+  $(".pupil").animate({"top": "-=22px"}, 900);  
 }
 
 
