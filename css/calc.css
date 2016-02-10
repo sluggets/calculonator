@@ -189,3 +189,56 @@ button:hover
   font-size: 14px;
 }
 
+footer
+{
+  font-family: 'Dosis', sans-serif;
+  color: #fc3d9c;
+  text-shadow: 1px 1px 8px black;
+  margin-top: 20px;
+  background-color: rgb(102, 0, 31);
+  text-align: center;
+  padding-top: 10px;
+  padding-bottom: 5px;
+}
+
+
+.list-group-item
+{
+  background-color: #9c002f;
+  border: 1px solid #800026;
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+#about
+{
+  display: none; 
+}
+
+#projects
+{
+  display: none;
+}
+
+#timpic
+{
+  display: none;
+  border-radius: 30px;
+}
+
+a, a:visited, a:focus
+{
+  color: #fc3d9c;
+  text-decoration: none;
+}
+
+a:hover
+{
+  color: #fd81bf;
+  text-decoration: none;
+}
+
+i
+{
+  margin-left: 8px;
+}
