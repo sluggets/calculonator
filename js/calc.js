@@ -42,6 +42,7 @@ $(document).ready(function() {
   // to screen and when not to when chaining calculations
   opFlag = true;
   
+  // mini portfolio navigation
   $('#ab').click(function(){
     $('#about').toggle(600);
   });
