@@ -55,14 +55,6 @@ h1
   margin: auto;
 }
 
-/*#data-view
-{
-  width: 310px;
-  height: 80px; 
-  background-color: #a8f682;
-  border-radius: 50%;
-  box-shadow: inset 3px 3px 10px 1px grey;
-}*/
 #num-field
 {
   margin-right: 15px;
@@ -142,15 +134,16 @@ h1
   margin-left: 20px;
 }
 
+.fa-eye
+{
+  margin-left: 1px;
+}
+
 button
 {
-  /*border-style: none solid none none;
-  border-width: 5px;
-  border-color: #000;*/
   display: block;
   height: 40px;
   width: 40px;
-  /*background-color: #a8f682;*/
   background-color: #bdf8a0;
   border-style: none;
   font-family: 'Candal', sans-serif;
