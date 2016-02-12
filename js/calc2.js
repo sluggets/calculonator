@@ -265,6 +265,7 @@ function displayAndComputeValue(val)
 
   // prints button presses to screen
   // and adds them to ongoing strVal, creates operand
+  countCharsAndShrink();
   $("#readout").append(val);
   strVal += val;
 }
@@ -555,6 +556,9 @@ function equalTally()
   totalVal = globVal;
   clearValue();
   
+  // changes font size for displaying large values
+  countNumValAndShrink(totalVal, 99999999);  
+
   // fixes floats to 2 decimal points
   if (totalVal % 1 !== 0)
   {
@@ -595,4 +599,29 @@ function playRandom()
 function getRandomIntInclusive(min, max) 
 {
   return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// count characters to be printed to calculator
+// display and shrinks font to fit large values
+function countCharsAndShrink()
+{
+  var currentReadout = document.getElementById("readout").innerHTML;
+  var len = currentReadout.length;
+  if (len > 10)
+  {
+    $("#readout").css("font-size", "17px");
+  }
+
+}
+
+// compares calculation(numval) to the 
+// largest value for default font size(maxval)
+// and shrinks font accordingly
+function countNumValAndShrink(numval, maxval)
+{
+  if (numval > maxval)
+  {
+    $('#readout').css('font-size', '17px');
+  }
+
 }

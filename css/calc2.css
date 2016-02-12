@@ -63,10 +63,15 @@ h1
 
 #num-field > p
 {
-  font-size: 35px; 
+  /*font-size: 35px;*/
   float: right;
   font-family: 'Candal', sans-serif;
   text-shadow: 1px 1px 3px grey;
+}
+
+#readout
+{
+  font-size: 35px;
 }
 
 .eyes
